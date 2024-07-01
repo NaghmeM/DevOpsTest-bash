@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Function  to display usage
+
+#usage() {
+#    cat <<EOL
+#Usage: $0 [OPTIONS] <source_dir> <backup_name>
+#Options:
+#   -v 		   : Verbose mode.
+#   --date <format> : Add date to the backup filename.
+#                     Supported  formats: time, date, datetime, timestamp
+
+#EOL
+#}
+
+#if [[ $# -lt 2 ]]; then
+#   usage
+#    exit 1
+#fi
+
 # Prompt the user for the path
 read -p "Enter the path to the directory you want to backup: " dir_path
 
@@ -10,7 +28,7 @@ if [ ! -d "$dir_path" ]; then
 fi
 
 # Create a backup directory
-backup_dir="${dir_path}_backup"
+backup_dir="${dir_path}_backup_$(date +"%Y%m%d%H%M%S")"
 cp -r "$dir_path" "$backup_dir"
 
 # Compress the backup
