@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Function to display usage instructions
+usage() {
+    echo "Usage: $0 <directory_path> <s3_bucket_name>"
+    echo "Example: $0 /path/to/directory my-s3-bucket"
+    exit 1
+}
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 2 ]; then
+    usage
+fi
+
+DIRECTORY_PATH=$1
+BUCKET_NAME=$2
+
+# Validate the directory path
+if [ ! -d "$DIRECTORY_PATH" ]; then
+    echo "The provided path '$DIRECTORY_PATH' is not a valid directory."
+    exit 1
+fi
+
+# Load environment variables from the .env file
+if [ -f .env ]; then
+    export $(cat .env | xargs)
+else
+    echo ".env file not found. Please create one with RESTIC_PASSWORD."
+    exit 1
+fi
+
+# Check if the RESTIC_PASSWORD variable is set
+if [ -z "$RESTIC_PASSWORD" ]; then
+    echo "RESTIC_PASSWORD is not set. Please set it in the .env file."
+    exit 1
+fi
+
+# Set up Restic environment variables
+export RESTIC_REPOSITORY="s3:s3.amazonaws.com/$BUCKET_NAME"
+
+# Perform the backup
+restic backup "$DIRECTORY_PATH"
+if [ $? -eq 0 ]; then
+    echo "Backup completed successfully."
+else
+    echo "Backup failed."
+    exit 1
+fi
+
