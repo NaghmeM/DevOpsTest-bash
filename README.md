@@ -24,8 +24,8 @@ To get started with these exercises, you'll need to have Bash installed on your 
 Clone the repository to your local machine using the following command:
 
 ```sh
-git clone https://github.com/yourusername/bash-scripting-exercises.git
-cd bash-scripting-exercises
+git clone https://github.com/NaghmeM/DevOpsTest-bash.git
+cd DevOpsTest-bash
 ```
 
 ## Repository Structure
