@@ -66,6 +66,6 @@ Please make sure to follow the existing format and structure of the repository w
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache2 License - see the [LICENSE](LICENSE) file for details.
 
 Happy scripting! If you have any questions or need further assistance, feel free to open an issue in this repository.
